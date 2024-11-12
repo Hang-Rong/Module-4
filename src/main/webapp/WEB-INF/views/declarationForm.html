@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tờ Khai Y Tế</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+        }
+
+        .note {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="email"],
+        select,
+        textarea {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .form-group.half {
+            flex: 1;
+        }
+
+        .required::after {
+            content: " (*)";
+            color: red;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            background-color: green;
+            color: white;
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background-color: darkgreen;
+        }
+
+        .red-border:required:invalid {
+            border: 2px solid red;
+        }
+
+        .flex-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>TỜ KHAI Y TẾ</h2>
+    <p class="note">Đây là tài liệu quan trọng, thông tin của Anh/Chị sẽ giúp cơ quan y tế liên lạc khi cần thiết để phòng chống dịch bệnh truyền nhiễm.</p>
+
+    <form>
+        <div class="form-group">
+            <label for="name" class="required">Họ tên (ghi chữ IN HOA)</label>
+            <input type="text" id="name" name="name" class="red-border" required placeholder="Vui lòng nhập họ tên">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group half">
+                <label for="birth-year" class="required">Năm sinh</label>
+                <select id="birth-year" name="birth-year" class="red-border" required>
+                    <option value="">-Chọn-</option>
+                    <option value="1990">1990</option>
+                    <option value="1991">1991</option>
+                    <option value="1992">1992</option>
+                </select>
+            </div>
+            <div class="form-group half">
+                <label for="gender" class="required">Giới tính</label>
+                <select id="gender" name="gender" class="red-border" required>
+                    <option value="">-Chọn-</option>
+                    <option value="male">Nam</option>
+                    <option value="female">Nữ</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="nationality" class="required">Quốc tịch</label>
+            <input type="text" id="nationality" name="nationality" class="red-border" required placeholder="Việt Nam">
+        </div>
+
+        <div class="form-group">
+            <label for="id-number">Số hộ chiếu hoặc số CMND/giấy tờ khác</label>
+            <input type="text" id="id-number" name="id-number" class="red-border" required placeholder="Vui lòng nhập số CMND hoặc hộ chiếu">
+        </div>
+
+        <h3>Triệu chứng trong 14 ngày qua</h3>
+        <div class="form-group">
+            <div class="flex-label">
+                <label class="required">Sốt</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="fever" value="yes" required> Có</label>
+                    <label><input type="radio" name="fever" value="no"> Không</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="flex-label">
+                <label class="required">Ho</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="cough" value="yes" required> Có</label>
+                    <label><input type="radio" name="cough" value="no"> Không</label>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">GỬI TỜ KHAI</button>
+    </form>
+</div>
+
+</body>
+</html>
