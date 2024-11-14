@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Song</title>
+</head>
+<body>
+<h1>Upload Song</h1>
+<form action="/songs/upload" method="post" enctype="multipart/form-data">
+    <label for="title">Tên bài hát:</label>
+    <input type="text" id="title" name="title" required><br><br>
+
+    <label for="artist">Nghệ sĩ thể hiện:</label>
+    <input type="text" id="artist" name="artist" required><br><br>
+
+    <label for="genre">Thể loại:</label>
+    <input type="text" id="genre" name="genre" required><br><br>
+
+    <label for="filePath">Chọn file nhạc:</label>
+    <input type="file" id="filePath" name="filePath" accept=".mp3, .wav, .ogg, .m4p" required><br><br>
+
+    <button type="submit">Upload</button>
+</form>
+
+<p th:if="${error}" th:text="${error}" style="color:red;"></p>
+</body>
+</html>

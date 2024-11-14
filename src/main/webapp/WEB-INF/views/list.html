@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Song List</title>
+</head>
+<body>
+<h1>Song List</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Tên bài hát</th>
+        <th>Nghệ sĩ</th>
+        <th>Thể loại</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="song : ${songs}">
+        <td th:text="${song.title}">Tên bài hát</td>
+        <td th:text="${song.artist}">Nghệ sĩ</td>
+        <td th:text="${song.genre}">Thể loại</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
