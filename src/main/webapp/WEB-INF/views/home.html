@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA APOD Viewer</title>
+</head>
+<body>
+<h1>NASA Picture of the Day</h1>
+<img id="img-of-the-day" alt="NASA APOD" width="600">
+<h2>Leave your feedback:</h2>
+<form id="feedback-form">
+    <label for="author">Author:</label>
+    <input type="text" id="author" name="author" required><br>
+    <label for="rating">Rating (1-5):</label>
+    <input type="number" id="rating" name="rating" min="1" max="5" required><br>
+    <label for="comment">Comment:</label>
+    <textarea id="comment" name="comment" required></textarea><br>
+    <button type="submit">Submit</button>
+</form>
+
+<h2>Feedbacks:</h2>
+<div id="comments-container"></div>
+
+<script>
+    const apiKey = "YOUR_API_KEY";
+    const query = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+    fetch(query)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('img-of-the-day').src = data.url;
+        })
+        .catch(error => console.error("Error fetching APOD:", error));
+
+    document.getElementById('feedback-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const author = document.getElementById('author').value;
+        const rating = document.getElementById('rating').value;
+        const comment = document.getElementById('comment').value;
+
+        await fetch('/api/feedbacks', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ author, rating, comment }),
+        });
+
+        loadFeedbacks();
+    });
+
+    async function loadFeedbacks() {
+        const response = await fetch('/api/feedbacks');
+        const feedbacks = await response.json();
+        const container = document.getElementById('comments-container');
+        container.innerHTML = feedbacks.map(fb => `
+        <div>
+          <p><strong>${fb.author}</strong> rated <strong>${fb.rating}/5</strong></p>
+          <p>${fb.comment}</p>
+          <p>${fb.likes} likes <button onclick="likeComment(${fb.id})">Like</button></p>
+        </div>
+      `).join('');
+    }
+
+    async function likeComment(id) {
+        await fetch(`/api/feedbacks/${id}/like`, { method: 'POST' });
+        loadFeedbacks();
+    }
+
+    loadFeedbacks();
+</script>
+</body>
+</html>
