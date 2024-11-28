@@ -5,6 +5,7 @@
 </head>
 <body>
 <h1 th:text="${blog.title}">Blog Title</h1>
+<p><strong>Category:</strong> <span th:text="${blog.category.name}">Category Name</span></p>
 <p th:text="${blog.content}">Blog Content</p>
 <a href="/blogs">Back to Blog List</a> |
 <a th:href="@{/blogs/{id}/edit(id=${blog.id})}">Edit</a> |

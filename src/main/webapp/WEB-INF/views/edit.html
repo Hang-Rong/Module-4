@@ -12,6 +12,15 @@
     <label for="content">Content:</label>
     <textarea id="content" name="content" th:text="${blog.content}" required></textarea>
     <br>
+    <label for="category">Category:</label>
+    <select id="category" name="category.id">
+        <option th:each="category : ${categories}"
+                th:value="${category.id}"
+                th:text="${category.name}"
+                th:selected="${blog.category != null and blog.category.id == category.id}">
+        </option>
+    </select>
+    <br>
     <button type="submit">Update Blog</button>
 </form>
 <a href="/blogs">Back to Blog List</a>
