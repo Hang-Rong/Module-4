@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Library</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Library Books</h1>
+<table>
+    <tr>
+        <th>Code</th>
+        <th>Title</th>
+        <th>Quantity</th>
+    </tr>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.code}"></td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.quantity}"></td>
+    </tr>
+</table>
+<a href="/books/borrow">Borrow a Book</a>
+<a href="/books/return">Return a Book</a>
+</body>
+</html>
