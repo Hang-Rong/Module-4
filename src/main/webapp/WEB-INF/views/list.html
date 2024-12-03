@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Customer</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            successHandler();
+        });
+
+        function addNewCustomer() {
+            //lay du lieu
+            let firstName = $('#firstName').val();
+            let lastName = $('#lastName').val();
+            let newCustomer = {
+                lastName: lastName,
+                firstName: firstName,
+            };
+
+            // goi ajax
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: "POST",
+                data: JSON.stringify(newCustomer),
+                //tên API
+                url: "/api/customers",
+                success: successHandler
+                //xử lý khi thành công
+                //success: console.log('success')
+
+
+            });
+            //chặn sự kiện mặc định của thẻ
+            event.preventDefault();
+        }
+
+        function getCustomer(customer) {
+            return `<tr><td >${customer.firstName}</td><td >${customer.lastName}</td></tr>`;
+        }
+
+        function successHandler() {
+            $.ajax({
+                type: "GET",
+                //tên API
+                url: "/api/customers",
+                //xử lý khi thành công
+                success: function (data) {
+                    // hien thi danh sach o day
+                    let content = '    <tr>\n' +
+                        '        <td>FirstName</td>\n' +
+                        '        <td>LastName</td>\n' +
+                        '    </tr>';
+                    for (let i = 0; i < data.length; i++) {
+                        content += getCustomer(data[i]);
+                    }
+                    document.getElementById('customerList').innerHTML = content;
+                }
+            });
+        }
+
+    </script>
+
+</head>
+<body>
+<h1 th:text="#{list.head}"></h1>
+<div>
+<h2 th:text="#{list.lang_option}"></h2>
+<a href="?lang=en">English</a> | <a href="?lang=ja">日本語</a>
+</div>
+<form id="add-customer">
+    <table>
+        <tr>
+            <td th:text="#{list.firstname_label}"></td>
+            <td><input type="text" id="firstName" th:placeholder="#{list.firstname_holder}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{list.lastname_label}"></td>
+            <td><input type="text" id="lastName" th:placeholder="#{list.lastname_holder}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" th:value="#{list.submit_btn}" onclick="addNewCustomer()"></td>
+        </tr>
+    </table>
+</form>
+
+<h1 th:text="#{list.title}"></h1>
+<table id="customerList">
+</table>
+
+</body>
+
+
+</html>
