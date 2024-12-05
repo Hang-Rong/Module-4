@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Blog</title>
+</head>
+<body>
+<h1 th:text="${blog.title}">Blog Title</h1>
+<p><strong>Category:</strong> <span th:text="${blog.category.name}">Category Name</span></p>
+<p th:text="${blog.content}">Blog Content</p>
+<a href="/blogs">Back to Blog List</a> |
+<a th:href="@{/blogs/{id}/edit(id=${blog.id})}">Edit</a> |
+<a th:href="@{/blogs/{id}/delete(id=${blog.id})}" onclick="return confirm('Are you sure you want to delete this blog?')">Delete</a>
+</body>
+</html>
