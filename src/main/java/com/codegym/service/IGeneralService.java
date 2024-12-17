@@ -1,8 +1,10 @@
 package com.codegym.service;
 
+import org.springframework.data.domain.Pageable;
+
 import java.util.Optional;
 
-public interface IGenerateService<T> {
+public interface IGeneralService<T> {
     Iterable<T> findAll();
 
     Optional<T> findById(Long id);

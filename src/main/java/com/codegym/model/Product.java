@@ -15,15 +15,4 @@ public class Product {
     private Double Price;
     private Double Quantity;
     private String ImageURL;
-
-    public Product() {
-    }
-
-    public Product(Long id, String name, Double price, Double quantity, String fileName) {
-        this.id = id;
-        Name = name;
-        Price = price;
-        Quantity = quantity;
-        ImageURL = fileName;
-    }
 }

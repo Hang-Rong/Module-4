@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,7 +10,7 @@
 <form th:action="@{/products/create}" th:object="${product}" method="post">
     <table>
         <tr>
-            <td>Name:</td>
+            <td>Name</td>
             <td><input type="text" th:field="*{Name}"/></td>
         </tr>
         <tr>
@@ -22,8 +22,8 @@
             <td><input type="number" th:field="*{Quantity}"/></td>
         </tr>
         <tr>
-            <td>Image:</td>
-            <td><input type="file" id="image" th:field="*{ImageURL}"/></td>
+            <td>ImageURL:</td>
+            <td><input type="text" th:field="*{ImageURL}"/></td>
         </tr>
         <tr>
             <td></td>
